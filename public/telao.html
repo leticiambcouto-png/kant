@@ -137,10 +137,14 @@
       0 0 20px rgba(24,64,235,0.5);
   }
   .ticker-sep {
-    font-size: clamp(18px, 2.5vw, 32px);
-    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
     padding: 0 16px;
-    opacity: 0.6;
+    opacity: 0.8;
+  }
+  .ticker-sep svg {
+    width: clamp(18px, 2.5vw, 32px);
+    height: clamp(18px, 2.5vw, 32px);
   }
   @keyframes tickerScroll {
     from { transform: translateX(0); }
@@ -288,14 +292,14 @@
 
   <div class="ticker-wrap">
     <div class="ticker">
-      <span class="ticker-item">Ambição</span><span class="ticker-sep">★</span>
-      <span class="ticker-item alt">Sonhar Grande</span><span class="ticker-sep">★</span>
-      <span class="ticker-item">Accountability</span><span class="ticker-sep">★</span>
-      <span class="ticker-item alt">Juntos Somos Mais Forte</span><span class="ticker-sep">★</span>
-      <span class="ticker-item">Ambição</span><span class="ticker-sep">★</span>
-      <span class="ticker-item alt">Sonhar Grande</span><span class="ticker-sep">★</span>
-      <span class="ticker-item">Accountability</span><span class="ticker-sep">★</span>
-      <span class="ticker-item alt">Juntos Somos Mais Forte</span><span class="ticker-sep">★</span>
+      <span class="ticker-item">Ambição</span><span class="ticker-sep"><svg viewBox="0 0 654 762" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M327 0C234.6 0 149.4 34.2 84.6 90.6L327 333L569.4 90.6C504.6 34.2 419.4 0 327 0Z" fill="#d9f22a"/><path d="M0 381C0 473.4 34.2 558.6 90.6 623.4L333 381L90.6 138.6C34.2 203.4 0 288.6 0 381Z" fill="#d9f22a"/><path d="M327 762C419.4 762 504.6 727.8 569.4 671.4L327 429L84.6 671.4C149.4 727.8 234.6 762 327 762Z" fill="#d9f22a"/><path d="M654 381C654 288.6 619.8 203.4 563.4 138.6L321 381L563.4 623.4C619.8 558.6 654 473.4 654 381Z" fill="#d9f22a"/><path d="M327 167L379.6 311.4H532L410.2 397.6L462.8 542L341 455.8L219.2 542L271.8 397.6L150 311.4H302.4L327 167Z" fill="white"/></svg></span>
+      <span class="ticker-item alt">Sonhar Grande</span><span class="ticker-sep"><svg viewBox="0 0 654 762" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M327 0C234.6 0 149.4 34.2 84.6 90.6L327 333L569.4 90.6C504.6 34.2 419.4 0 327 0Z" fill="#d9f22a"/><path d="M0 381C0 473.4 34.2 558.6 90.6 623.4L333 381L90.6 138.6C34.2 203.4 0 288.6 0 381Z" fill="#d9f22a"/><path d="M327 762C419.4 762 504.6 727.8 569.4 671.4L327 429L84.6 671.4C149.4 727.8 234.6 762 327 762Z" fill="#d9f22a"/><path d="M654 381C654 288.6 619.8 203.4 563.4 138.6L321 381L563.4 623.4C619.8 558.6 654 473.4 654 381Z" fill="#d9f22a"/><path d="M327 167L379.6 311.4H532L410.2 397.6L462.8 542L341 455.8L219.2 542L271.8 397.6L150 311.4H302.4L327 167Z" fill="white"/></svg></span>
+      <span class="ticker-item">Accountability</span><span class="ticker-sep"><svg viewBox="0 0 654 762" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M327 0C234.6 0 149.4 34.2 84.6 90.6L327 333L569.4 90.6C504.6 34.2 419.4 0 327 0Z" fill="#d9f22a"/><path d="M0 381C0 473.4 34.2 558.6 90.6 623.4L333 381L90.6 138.6C34.2 203.4 0 288.6 0 381Z" fill="#d9f22a"/><path d="M327 762C419.4 762 504.6 727.8 569.4 671.4L327 429L84.6 671.4C149.4 727.8 234.6 762 327 762Z" fill="#d9f22a"/><path d="M654 381C654 288.6 619.8 203.4 563.4 138.6L321 381L563.4 623.4C619.8 558.6 654 473.4 654 381Z" fill="#d9f22a"/><path d="M327 167L379.6 311.4H532L410.2 397.6L462.8 542L341 455.8L219.2 542L271.8 397.6L150 311.4H302.4L327 167Z" fill="white"/></svg></span>
+      <span class="ticker-item alt">Juntos Somos Mais Forte</span><span class="ticker-sep"><svg viewBox="0 0 654 762" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M327 0C234.6 0 149.4 34.2 84.6 90.6L327 333L569.4 90.6C504.6 34.2 419.4 0 327 0Z" fill="#d9f22a"/><path d="M0 381C0 473.4 34.2 558.6 90.6 623.4L333 381L90.6 138.6C34.2 203.4 0 288.6 0 381Z" fill="#d9f22a"/><path d="M327 762C419.4 762 504.6 727.8 569.4 671.4L327 429L84.6 671.4C149.4 727.8 234.6 762 327 762Z" fill="#d9f22a"/><path d="M654 381C654 288.6 619.8 203.4 563.4 138.6L321 381L563.4 623.4C619.8 558.6 654 473.4 654 381Z" fill="#d9f22a"/><path d="M327 167L379.6 311.4H532L410.2 397.6L462.8 542L341 455.8L219.2 542L271.8 397.6L150 311.4H302.4L327 167Z" fill="white"/></svg></span>
+      <span class="ticker-item">Ambição</span><span class="ticker-sep"><svg viewBox="0 0 654 762" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M327 0C234.6 0 149.4 34.2 84.6 90.6L327 333L569.4 90.6C504.6 34.2 419.4 0 327 0Z" fill="#d9f22a"/><path d="M0 381C0 473.4 34.2 558.6 90.6 623.4L333 381L90.6 138.6C34.2 203.4 0 288.6 0 381Z" fill="#d9f22a"/><path d="M327 762C419.4 762 504.6 727.8 569.4 671.4L327 429L84.6 671.4C149.4 727.8 234.6 762 327 762Z" fill="#d9f22a"/><path d="M654 381C654 288.6 619.8 203.4 563.4 138.6L321 381L563.4 623.4C619.8 558.6 654 473.4 654 381Z" fill="#d9f22a"/><path d="M327 167L379.6 311.4H532L410.2 397.6L462.8 542L341 455.8L219.2 542L271.8 397.6L150 311.4H302.4L327 167Z" fill="white"/></svg></span>
+      <span class="ticker-item alt">Sonhar Grande</span><span class="ticker-sep"><svg viewBox="0 0 654 762" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M327 0C234.6 0 149.4 34.2 84.6 90.6L327 333L569.4 90.6C504.6 34.2 419.4 0 327 0Z" fill="#d9f22a"/><path d="M0 381C0 473.4 34.2 558.6 90.6 623.4L333 381L90.6 138.6C34.2 203.4 0 288.6 0 381Z" fill="#d9f22a"/><path d="M327 762C419.4 762 504.6 727.8 569.4 671.4L327 429L84.6 671.4C149.4 727.8 234.6 762 327 762Z" fill="#d9f22a"/><path d="M654 381C654 288.6 619.8 203.4 563.4 138.6L321 381L563.4 623.4C619.8 558.6 654 473.4 654 381Z" fill="#d9f22a"/><path d="M327 167L379.6 311.4H532L410.2 397.6L462.8 542L341 455.8L219.2 542L271.8 397.6L150 311.4H302.4L327 167Z" fill="white"/></svg></span>
+      <span class="ticker-item">Accountability</span><span class="ticker-sep"><svg viewBox="0 0 654 762" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M327 0C234.6 0 149.4 34.2 84.6 90.6L327 333L569.4 90.6C504.6 34.2 419.4 0 327 0Z" fill="#d9f22a"/><path d="M0 381C0 473.4 34.2 558.6 90.6 623.4L333 381L90.6 138.6C34.2 203.4 0 288.6 0 381Z" fill="#d9f22a"/><path d="M327 762C419.4 762 504.6 727.8 569.4 671.4L327 429L84.6 671.4C149.4 727.8 234.6 762 327 762Z" fill="#d9f22a"/><path d="M654 381C654 288.6 619.8 203.4 563.4 138.6L321 381L563.4 623.4C619.8 558.6 654 473.4 654 381Z" fill="#d9f22a"/><path d="M327 167L379.6 311.4H532L410.2 397.6L462.8 542L341 455.8L219.2 542L271.8 397.6L150 311.4H302.4L327 167Z" fill="white"/></svg></span>
+      <span class="ticker-item alt">Juntos Somos Mais Forte</span><span class="ticker-sep"><svg viewBox="0 0 654 762" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M327 0C234.6 0 149.4 34.2 84.6 90.6L327 333L569.4 90.6C504.6 34.2 419.4 0 327 0Z" fill="#d9f22a"/><path d="M0 381C0 473.4 34.2 558.6 90.6 623.4L333 381L90.6 138.6C34.2 203.4 0 288.6 0 381Z" fill="#d9f22a"/><path d="M327 762C419.4 762 504.6 727.8 569.4 671.4L327 429L84.6 671.4C149.4 727.8 234.6 762 327 762Z" fill="#d9f22a"/><path d="M654 381C654 288.6 619.8 203.4 563.4 138.6L321 381L563.4 623.4C619.8 558.6 654 473.4 654 381Z" fill="#d9f22a"/><path d="M327 167L379.6 311.4H532L410.2 397.6L462.8 542L341 455.8L219.2 542L271.8 397.6L150 311.4H302.4L327 167Z" fill="white"/></svg></span>
     </div>
   </div>
 
@@ -310,7 +314,7 @@
 </div>
 
 <div class="flash" id="flash">
-  <div class="flash-label">★ Chegou mais um</div>
+  <div class="flash-label"><svg viewBox="0 0 100 116" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;vertical-align:middle;margin-right:6px"><path d="M50 0C35.9 0 22.9 5.2 13 13.9L50 50.9L87 13.9C77.1 5.2 64.1 0 50 0Z" fill="#d9f22a"/><path d="M0 58.3C0 72.4 5.2 85.3 13.9 95.2L50.9 58.3L13.9 21.2C5.2 31.1 0 44.1 0 58.3Z" fill="#d9f22a"/><path d="M50 116.6C64.1 116.6 77.1 111.4 87 102.7L50 65.7L13 102.7C22.9 111.4 35.9 116.6 50 116.6Z" fill="#d9f22a"/><path d="M100 58.3C100 44.1 94.8 31.1 86.1 21.2L49.1 58.3L86.1 95.2C94.8 85.3 100 72.4 100 58.3Z" fill="#d9f22a"/><path d="M50 25.5L58.1 47.6H81.4L62.7 60.8L70.8 82.9L52.1 69.7L33.5 82.9L41.6 60.8L22.9 47.6H46.2L50 25.5Z" fill="white"/></svg> Chegou mais um</div>
   <div class="flash-nome" id="flashNome"></div>
   <div class="flash-valor" id="flashValor"></div>
 </div>
@@ -389,7 +393,7 @@ function placeNome(nome, valor, isNew) {
 function showFlash(nome, valor) {
   const f = document.getElementById('flash');
   document.getElementById('flashNome').textContent = nome;
-  document.getElementById('flashValor').textContent = '★ ' + valor;
+  document.getElementById('flashValor').innerHTML = '<svg viewBox="0 0 100 116" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;vertical-align:middle;margin-right:6px"><path d="M50 0C35.9 0 22.9 5.2 13 13.9L50 50.9L87 13.9C77.1 5.2 64.1 0 50 0Z" fill="#d9f22a"/><path d="M0 58.3C0 72.4 5.2 85.3 13.9 95.2L50.9 58.3L13.9 21.2C5.2 31.1 0 44.1 0 58.3Z" fill="#d9f22a"/><path d="M50 116.6C64.1 116.6 77.1 111.4 87 102.7L50 65.7L13 102.7C22.9 111.4 35.9 116.6 50 116.6Z" fill="#d9f22a"/><path d="M100 58.3C100 44.1 94.8 31.1 86.1 21.2L49.1 58.3L86.1 95.2C94.8 85.3 100 72.4 100 58.3Z" fill="#d9f22a"/><path d="M50 25.5L58.1 47.6H81.4L62.7 60.8L70.8 82.9L52.1 69.7L33.5 82.9L41.6 60.8L22.9 47.6H46.2L50 25.5Z" fill="white"/></svg> ' + valor;
   f.classList.add('show');
   setTimeout(() => f.classList.remove('show'), 3200);
 }
