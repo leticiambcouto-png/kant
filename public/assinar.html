@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Sua Convocação — Stellar Gaming</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Barlow+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/lineicons@1.3.2/dist/lineicons.css" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:      #001023;
+    --bg2:     #000d1c;
+    --bg3:     #001a35;
+    --accent:  #d9f22a;
+    --second:  #fdffdf;
+    --blue:    #1840eb;
+    --text:    #f0f6ff;
+    --muted:   rgba(240,246,255,0.45);
+  }
+
+  html, body {
+    min-height: 100%;
+    background: var(--bg2);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100svh;
+    padding: 32px 20px 40px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Fundo dinâmico */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 10% 0%, rgba(24,64,235,0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 90% 100%, rgba(217,242,42,0.09) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(0,26,53,0.6) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Linha de scan decorativa */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    animation: scanLine 3s ease-in-out infinite;
+    z-index: 10;
+    opacity: 0.6;
+  }
+  @keyframes scanLine {
+    0%   { top: -2px; opacity: 0; }
+    5%   { opacity: 0.6; }
+    95%  { opacity: 0.6; }
+    100% { top: 100vh; opacity: 0; }
+  }
+
+  /* Card principal */
+  .card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 440px;
+    background: rgba(0,16,35,0.88);
+    border: 1px solid rgba(217,242,42,0.18);
+    border-radius: 20px;
+    padding: 36px 28px 32px;
+    backdrop-filter: blur(24px);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04),
+      0 40px 100px rgba(0,0,0,0.6),
+      0 0 60px rgba(217,242,42,0.05);
+  }
+
+  /* Logo */
+  .logo-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+  .logo-wrap svg { width: 150px; height: auto; }
+
+  /* ── INTRO ── */
+  .intro-block {
+    margin-bottom: 28px;
+  }
+  .intro-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.2s forwards;
+  }
+  .intro-tag::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .headline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 38px;
+    line-height: 1.0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--second);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.35s forwards;
+  }
+  .headline .accent { color: var(--accent); }
+  .headline .break { display: block; }
+
+  .intro-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 0;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.5s forwards;
+  }
+  .intro-text strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* Divisor */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(217,242,42,0.3) 0%, rgba(217,242,42,0.05) 100%);
+    margin: 24px 0;
+    opacity: 0;
+    animation: fadeIn 0.5s ease 0.65s forwards;
+  }
+
+  /* ── FORM ── */
+  .form-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.75s forwards;
+  }
+
+  .field {
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.85s forwards;
+  }
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  input {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 15px 16px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+  input::placeholder { color: var(--muted); font-weight: 400; }
+  input:focus {
+    border-color: var(--accent);
+    background: rgba(217,242,42,0.04);
+    box-shadow: 0 0 0 3px rgba(217,242,42,0.1);
+  }
+
+  /* Valores */
+  .valores-wrap {
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.95s forwards;
+    margin-bottom: 24px;
+  }
+  .valores-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .valores-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .valor-btn {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 11px 12px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .valor-btn i { font-size: 14px; flex-shrink: 0; }
+  .valor-btn:hover {
+    border-color: rgba(217,242,42,0.4);
+    color: var(--second);
+    background: rgba(217,242,42,0.06);
+  }
+  .valor-btn.selected {
+    border-color: var(--accent);
+    background: rgba(217,242,42,0.1);
+    color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(217,242,42,0.2);
+  }
+
+  /* CTA */
+  .cta-wrap {
+    opacity: 0;
+    animation: fadeUp 0.5s ease 1.05s forwards;
+  }
+  .btn-assinar {
+    width: 100%;
+    background: var(--accent);
+    border: none;
+    border-radius: 10px;
+    padding: 17px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--bg2);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 28px rgba(217,242,42,0.3);
+  }
+  .btn-assinar:hover {
+    background: #e8ff3a;
+    box-shadow: 0 6px 36px rgba(217,242,42,0.45);
+    transform: translateY(-1px);
+  }
+  .btn-assinar:active { transform: translateY(0); }
+  .btn-assinar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .btn-note {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* Erro */
+  .error-msg {
+    display: none;
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(255,60,60,0.08);
+    border: 1px solid rgba(255,60,60,0.25);
+    border-radius: 8px;
+    font-size: 13px;
+    color: #ff8080;
+    text-align: center;
+  }
+  .error-msg.show { display: block; }
+
+  /* ── SUCESSO ── */
+  .success-state {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+  }
+  .success-state.show { display: flex; }
+
+  .success-badge {
+    margin-bottom: 20px;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .success-badge-inner {
+    width: 80px; height: 80px;
+    background: rgba(217,242,42,0.1);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    color: var(--accent);
+    box-shadow: 0 0 40px rgba(217,242,42,0.25);
+    margin: 0 auto;
+  }
+
+  .success-welcome {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .success-nome {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 34px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--second);
+    margin-bottom: 6px;
+    line-height: 1;
+  }
+  .success-valor-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(217,242,42,0.08);
+    border: 1px solid rgba(217,242,42,0.25);
+    border-radius: 6px;
+    padding: 5px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .success-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(217,242,42,0.2), transparent);
+    margin-bottom: 20px;
+  }
+
+  .success-msg-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .success-msg {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+    max-width: 300px;
+    margin-bottom: 24px;
+  }
+  .success-msg strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .success-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: default;
+  }
+
+  /* Manifesto */
+  .manifesto-block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.55s forwards;
+  }
+  .manifesto-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-left: 3px solid rgba(217,242,42,0.4);
+    border-radius: 0 10px 10px 0;
+    overflow: hidden;
+    transition: border-left-color 0.2s;
+  }
+  .manifesto-item:hover { border-left-color: var(--accent); }
+  .manifesto-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 16px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .manifesto-header:hover { background: rgba(217,242,42,0.03); }
+  .manifesto-valor {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .manifesto-valor i { font-size: 14px; }
+  .manifesto-chevron {
+    font-size: 13px;
+    color: var(--muted);
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+  }
+  .manifesto-item.open .manifesto-chevron { transform: rotate(180deg); }
+  .manifesto-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+  .manifesto-item.open .manifesto-body { max-height: 120px; }
+  .manifesto-frase {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(240,246,255,0.6);
+    line-height: 1.65;
+    padding: 0 16px 14px;
+  }
+  .manifesto-cta-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.5;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.7s forwards;
+  }
+
+  /* Footer */
+  .card-footer {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeIn 0.5s ease 1.2s forwards;
+  }
+  .card-footer span { color: var(--accent); }
+
+  /* Animações */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes popIn {
+    from { transform: scale(0.6); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <div class="logo-wrap">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 348.99">
+      <defs><style>.st0{fill:#d9f22a;}</style></defs>
+      <g>
+        <polygon class="st0" points="217.35 118.01 260.81 118.01 260.81 205.67 300.68 205.67 300.68 118.01 344.15 118.01 344.15 84.76 237.41 84.76 217.35 118.01"/>
+        <polygon class="st0" points="353.51 205.67 462.47 205.67 462.47 173.71 393.38 173.71 393.38 158.31 459.88 158.31 459.88 132.11 393.38 132.11 393.38 116.71 462.47 116.71 462.47 84.76 353.51 84.76 353.51 205.67"/>
+        <polygon class="st0" points="623.96 172.42 623.96 84.76 584.09 84.76 584.09 205.67 683.41 205.67 695.64 172.42 623.96 172.42"/>
+        <polygon class="st0" points="512.42 172.42 512.42 84.76 472.55 84.76 472.55 205.67 574.02 205.67 574.02 172.42 512.42 172.42"/>
+        <path class="st0" d="M738.26,84.76l-44.48,120.91h41.17l5.33-15.98h51.82l5.33,15.98h41.17l-44.48-120.91h-55.85ZM750.06,160.18l12.67-38h6.91l12.67,38h-32.24Z"/>
+        <path class="st0" d="M948.41,165.94c10.22-7.2,17.56-18.71,17.56-34.98,0-31.81-18.86-46.2-52.39-46.2h-69.23v120.91h39.87v-31.23h30.23l16.41,31.23h39.15l-21.59-39.73ZM910.84,144.64h-26.63v-26.77h26.63c10.08,0,15.26,4.89,15.26,13.39s-5.18,13.39-15.26,13.39Z"/>
+        <path class="st0" d="M199.88,127.57l26.14-43.32h-75.38c-22.45,0-40.64,18.2-40.64,40.64,0,17.34,10.86,32.13,26.14,37.97l-26.14,43.31h75.38c22.45,0,40.64-18.19,40.64-40.64,0-17.33-10.86-32.12-26.14-37.97ZM180.49,148.8l3.55,25.28-20-16.17-24.98,3.32,16.46-19.6-3.56-25.4,19.63,16.5,25.4-3.56-16.5,19.63Z"/>
+      </g>
+      <g>
+        <path class="st0" d="M652.23,287.6h-9.59l-.15-9.36c-4.45,6.75-12.58,11.51-24.02,11.51-19.49,0-34.38-14.12-34.38-34.38s14.43-34.38,35.61-34.38c13.97,0,28.08,6.52,31.54,22.71h-15.27c-2.46-5.83-8.29-9.44-16.04-9.44-11.97,0-20.72,8.67-20.72,21.1s8.82,21.1,20.41,21.1c6.45,0,15.42-2.84,17.65-12.58h-18.72v-10.36h33.69v34.07Z"/>
+        <path class="st0" d="M707.64,276.78h-31.77l-3.99,10.82h-15.81l24.94-64.46h21.49l25.02,64.46h-15.88l-3.99-10.82ZM703.34,265.2l-10.13-27.55h-2.92l-10.13,27.55h23.17Z"/>
+        <path class="st0" d="M731.74,223.14h19.57l15.96,45.2h1.15l15.96-45.2h19.57v64.46h-14.66v-38.83h-1.3l-14.2,38.83h-11.89l-14.2-38.83h-1.3v38.83h-14.66v-64.46Z"/>
+        <path class="st0" d="M810.54,223.14h15.27v64.46h-15.27v-64.46Z"/>
+        <path class="st0" d="M832.41,223.14h17.73l29.93,43.36h1.46v-43.36h14.96v64.46h-17.42l-30.31-43.36h-1.38v43.36h-14.96v-64.46Z"/>
+        <path class="st0" d="M970,287.6h-9.59l-.15-9.36c-4.45,6.75-12.58,11.51-24.02,11.51-19.49,0-34.38-14.12-34.38-34.38s14.43-34.38,35.61-34.38c13.97,0,28.08,6.52,31.54,22.71h-15.27c-2.46-5.83-8.29-9.44-16.04-9.44-11.97,0-20.72,8.67-20.72,21.1s8.82,21.1,20.41,21.1c6.45,0,15.42-2.84,17.65-12.58h-18.72v-10.36h33.69v34.07Z"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Form state -->
+  <div id="formState">
+
+    <div class="intro-block">
+      <div class="intro-tag">Nova fase. Novo nível.</div>
+
+      <div class="headline">
+        <span class="break">A Stellar entrou</span>
+        <span class="break">numa nova fase.</span>
+        <span class="break accent">Você também.</span>
+      </div>
+
+      <p class="intro-text">
+        Você recebeu esta convocação porque faz parte da equipe que vai construir o próximo capítulo.<br><br>
+        A Stellar vive nos seus valores. Não em palavras na parede, em cada atitude, todo dia.
+      </p>
+    </div>
+
+    <div class="manifesto-block">
+      <div class="manifesto-item">
+        <div class="manifesto-header">
+          <div class="manifesto-valor"><i class="lni lni-rocket"></i> Ambição</div>
+          <i class="lni lni-chevron-down manifesto-chevron"></i>
+        </div>
+        <div class="manifesto-body">
+          <div class="manifesto-frase">Não nos contentamos com o suficiente. Miramos mais alto porque acreditamos que é possível, e porque é isso que nos move.</div>
+        </div>
+      </div>
+      <div class="manifesto-item">
+        <div class="manifesto-header">
+          <div class="manifesto-valor"><i class="lni lni-star"></i> Sonhar Grande</div>
+          <i class="lni lni-chevron-down manifesto-chevron"></i>
+        </div>
+        <div class="manifesto-body">
+          <div class="manifesto-frase">Nossos sonhos definem o tamanho das nossas ações. Aqui, pensar pequeno não é humildade, é desperdício.</div>
+        </div>
+      </div>
+      <div class="manifesto-item">
+        <div class="manifesto-header">
+          <div class="manifesto-valor"><i class="lni lni-checkmark-circle"></i> Accountability</div>
+          <i class="lni lni-chevron-down manifesto-chevron"></i>
+        </div>
+        <div class="manifesto-body">
+          <div class="manifesto-frase">Assumimos o que é nosso. Erros, acertos, decisões. Sem transferir, sem esconder. Com a responsabilidade de quem sabe que faz diferença.</div>
+        </div>
+      </div>
+      <div class="manifesto-item">
+        <div class="manifesto-header">
+          <div class="manifesto-valor"><i class="lni lni-users"></i> Juntos Somos Mais</div>
+          <i class="lni lni-chevron-down manifesto-chevron"></i>
+        </div>
+        <div class="manifesto-body">
+          <div class="manifesto-frase">Nenhuma vitória aqui é individual. A gente cresce junto, resolve junto, celebra junto. É assim que se constrói algo que dura.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="manifesto-cta-text">Assine abaixo e leve esses valores com você, em cada escolha, em cada dia.</div>
+    <div class="divider"></div>
+
+    <div class="form-title">Ative sua convocação</div>
+
+    <div class="field">
+      <label for="nome">Seu nome</label>
+      <input type="text" id="nome" placeholder="Digite seu nome completo" autocomplete="given-name" autocapitalize="words">
+    </div>
+
+    <div class="cta-wrap">
+      <button class="btn-assinar" id="btnAssinar">
+        <i class="lni lni-bolt-alt"></i>
+        Ativar minha convocação
+      </button>
+
+
+      <div class="error-msg" id="errorMsg">
+        <i class="lni lni-warning"></i> Erro ao enviar. Tente novamente.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Success state -->
+  <div class="success-state" id="successState">
+
+    <div class="success-badge">
+      <div class="success-badge-inner"><i class="lni lni-bolt-alt"></i></div>
+    </div>
+
+    <div class="success-welcome">Convocação ativada</div>
+    <div class="success-nome" id="successNome"></div>
+
+
+    <div class="success-divider"></div>
+
+    <div class="success-msg-title">Você está no próximo nível.</div>
+    <p class="success-msg">
+      Sua convocação está ativa. Carregue esses valores com você, em cada atitude, todo dia.
+    </p>
+
+  </div>
+
+  <div class="card-footer">Stellar Gaming <span>★</span> 2026</div>
+</div>
+
+<script>
+  // Accordion manifesto
+  document.querySelectorAll('.manifesto-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.closest('.manifesto-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.manifesto-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  document.getElementById('btnAssinar').addEventListener('click', async () => {
+    const nome = document.getElementById('nome').value.trim();
+    const btn  = document.getElementById('btnAssinar');
+    const err  = document.getElementById('errorMsg');
+
+    if (!nome) {
+      document.getElementById('nome').focus();
+      document.getElementById('nome').style.borderColor = 'rgba(255,80,80,0.6)';
+      setTimeout(() => document.getElementById('nome').style.borderColor = '', 1500);
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="lni lni-spinner-arrow lni-spin"></i> Ativando…';
+    err.classList.remove('show');
+
+    try {
+      // monta URL absoluta baseada na origem + path atual sem o arquivo
+      const base = window.location.href.replace(/[?#].*$/, '').replace(/\/$/, '');
+      const apiUrl = base + '/api/assinar';
+      const res = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome, valor: 'STELLAR' })
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error('Erro ' + res.status);
+
+      document.getElementById('successNome').textContent = data.nome;
+      document.getElementById('formState').style.display = 'none';
+      document.getElementById('successState').classList.add('show');
+    } catch(e) {
+      err.classList.add('show');
+      btn.disabled = false;
+      btn.innerHTML = '<i class="lni lni-bolt-alt"></i> Ativar minha convocação';
+    }
+  });
+
+  document.getElementById('nome').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('btnAssinar').click();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TELÃO — STELLAR GAMING</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;700;800;900&family=Barlow+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:     #001023;
+    --bg2:    #000d1c;
+    --accent: #d9f22a;
+    --second: #fdffdf;
+    --blue:   #1840eb;
+    --muted:  rgba(240,246,255,0.4);
+  }
+
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: var(--bg2);
+    color: var(--second);
+    font-family: 'Barlow', sans-serif;
+  }
+
+  /* BG */
+  .bg-layer {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 50% at 5% 5%,   rgba(24,64,235,0.22) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 40% at 95% 95%,  rgba(217,242,42,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 80% 60% at 50% 50%,  rgba(0,10,25,0.7)    0%, transparent 80%),
+      var(--bg2);
+  }
+
+  /* GRID DE PONTOS */
+  .dot-grid {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.5;
+  }
+
+  .screen {
+    position: relative; z-index: 1;
+    width: 100vw; height: 100vh;
+    display: grid;
+    grid-template-rows: auto auto auto 1fr auto;
+  }
+
+  /* TOPO */
+  .top-bar {
+    padding: 32px 56px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo-area svg { width: 180px; height: auto; }
+
+  .top-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: clamp(10px, 1vw, 13px);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .top-badge span { color: var(--accent); }
+
+  /* HEADLINE */
+  .headline-block {
+    padding: 20px 56px 0;
+    text-align: center;
+  }
+  .headline-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: clamp(12px, 1.4vw, 18px);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .headline-main {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 4.8vw, 64px);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    line-height: 1.05;
+    color: var(--second);
+  }
+  .headline-main .accent {
+    color: var(--accent);
+    text-shadow: 0 0 30px rgba(217,242,42,0.4);
+  }
+
+  /* TICKER */
+  .ticker-wrap {
+    margin-top: 18px;
+    overflow: hidden;
+    height: clamp(48px, 7vw, 88px);
+    position: relative;
+  }
+  .ticker-wrap::before,
+  .ticker-wrap::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2;
+  }
+  .ticker-wrap::before { left:  0; background: linear-gradient(90deg,  var(--bg2), transparent); }
+  .ticker-wrap::after  { right: 0; background: linear-gradient(-90deg, var(--bg2), transparent); }
+
+  .ticker {
+    display: flex; align-items: center;
+    white-space: nowrap; height: 100%;
+    animation: tickerScroll 30s linear infinite;
+  }
+  .ticker-item {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 4.8vw, 64px);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    padding: 0 36px;
+    color: var(--accent);
+    text-shadow:
+      0 0 8px  rgba(217,242,42,0.9),
+      0 0 20px rgba(217,242,42,0.5),
+      0 0 50px rgba(217,242,42,0.2);
+  }
+  .ticker-item.alt {
+    color: #7ba4ff;
+    text-shadow:
+      0 0 8px  rgba(123,164,255,0.9),
+      0 0 20px rgba(24,64,235,0.5);
+  }
+  .ticker-sep {
+    font-size: clamp(18px, 2.5vw, 32px);
+    color: var(--accent);
+    padding: 0 16px;
+    opacity: 0.6;
+  }
+  @keyframes tickerScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* NOMES AREA */
+  .names-area {
+    position: relative;
+    margin: 12px 56px 0;
+    overflow: hidden;
+  }
+  .names-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    gap: 6px 20px;
+    padding: 8px 40px;
+    width: 100%;
+    height: 100%;
+  }
+  .name-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.175,0.885,0.32,1.275), font-size 0.5s ease;
+    pointer-events: none;
+    line-height: 1.2;
+  }
+  .name-tag.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .name-tag.highlight {
+    opacity: 1 !important;
+  }
+
+  /* RODAPÉ */
+  .footer {
+    padding: 12px 56px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .counter {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(13px, 1.8vw, 20px);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--muted);
+  }
+  .counter em {
+    color: var(--accent);
+    font-style: normal;
+    font-size: clamp(22px, 3.2vw, 40px);
+    text-shadow: 0 0 16px rgba(217,242,42,0.5);
+  }
+  .footer-brand {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(11px, 1.4vw, 17px);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+  .footer-brand span { color: var(--accent); }
+
+  /* FLASH */
+  .flash {
+    position: fixed;
+    bottom: 90px; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    z-index: 50;
+    background: rgba(0,10,25,0.96);
+    border: 1.5px solid var(--accent);
+    border-radius: 14px;
+    padding: 18px 40px;
+    text-align: center;
+    box-shadow: 0 0 50px rgba(217,242,42,0.25), 0 20px 60px rgba(0,0,0,0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s, transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+  }
+  .flash.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  .flash-label {
+    font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 6px;
+  }
+  .flash-nome {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: clamp(22px, 3vw, 40px);
+    text-transform: uppercase; letter-spacing: 2px;
+    color: var(--second);
+  }
+  .flash-valor {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="bg-layer"></div>
+<div class="dot-grid"></div>
+
+<div class="screen">
+  <div class="top-bar">
+    <div class="logo-area">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 348.99">
+        <defs><style>.st0{fill:#d9f22a;}</style></defs>
+        <g>
+          <polygon class="st0" points="217.35 118.01 260.81 118.01 260.81 205.67 300.68 205.67 300.68 118.01 344.15 118.01 344.15 84.76 237.41 84.76 217.35 118.01"/>
+          <polygon class="st0" points="353.51 205.67 462.47 205.67 462.47 173.71 393.38 173.71 393.38 158.31 459.88 158.31 459.88 132.11 393.38 132.11 393.38 116.71 462.47 116.71 462.47 84.76 353.51 84.76 353.51 205.67"/>
+          <polygon class="st0" points="623.96 172.42 623.96 84.76 584.09 84.76 584.09 205.67 683.41 205.67 695.64 172.42 623.96 172.42"/>
+          <polygon class="st0" points="512.42 172.42 512.42 84.76 472.55 84.76 472.55 205.67 574.02 205.67 574.02 172.42 512.42 172.42"/>
+          <path class="st0" d="M738.26,84.76l-44.48,120.91h41.17l5.33-15.98h51.82l5.33,15.98h41.17l-44.48-120.91h-55.85ZM750.06,160.18l12.67-38h6.91l12.67,38h-32.24Z"/>
+          <path class="st0" d="M948.41,165.94c10.22-7.2,17.56-18.71,17.56-34.98,0-31.81-18.86-46.2-52.39-46.2h-69.23v120.91h39.87v-31.23h30.23l16.41,31.23h39.15l-21.59-39.73ZM910.84,144.64h-26.63v-26.77h26.63c10.08,0,15.26,4.89,15.26,13.39s-5.18,13.39-15.26,13.39Z"/>
+          <path class="st0" d="M199.88,127.57l26.14-43.32h-75.38c-22.45,0-40.64,18.2-40.64,40.64,0,17.34,10.86,32.13,26.14,37.97l-26.14,43.31h75.38c22.45,0,40.64-18.19,40.64-40.64,0-17.33-10.86-32.12-26.14-37.97ZM180.49,148.8l3.55,25.28-20-16.17-24.98,3.32,16.46-19.6-3.56-25.4,19.63,16.5,25.4-3.56-16.5,19.63Z"/>
+        </g>
+        <g>
+          <path class="st0" d="M652.23,287.6h-9.59l-.15-9.36c-4.45,6.75-12.58,11.51-24.02,11.51-19.49,0-34.38-14.12-34.38-34.38s14.43-34.38,35.61-34.38c13.97,0,28.08,6.52,31.54,22.71h-15.27c-2.46-5.83-8.29-9.44-16.04-9.44-11.97,0-20.72,8.67-20.72,21.1s8.82,21.1,20.41,21.1c6.45,0,15.42-2.84,17.65-12.58h-18.72v-10.36h33.69v34.07Z"/>
+          <path class="st0" d="M707.64,276.78h-31.77l-3.99,10.82h-15.81l24.94-64.46h21.49l25.02,64.46h-15.88l-3.99-10.82ZM703.34,265.2l-10.13-27.55h-2.92l-10.13,27.55h23.17Z"/>
+          <path class="st0" d="M731.74,223.14h19.57l15.96,45.2h1.15l15.96-45.2h19.57v64.46h-14.66v-38.83h-1.3l-14.2,38.83h-11.89l-14.2-38.83h-1.3v38.83h-14.66v-64.46Z"/>
+          <path class="st0" d="M810.54,223.14h15.27v64.46h-15.27v-64.46Z"/>
+          <path class="st0" d="M832.41,223.14h17.73l29.93,43.36h1.46v-43.36h14.96v64.46h-17.42l-30.31-43.36h-1.38v43.36h-14.96v-64.46Z"/>
+          <path class="st0" d="M970,287.6h-9.59l-.15-9.36c-4.45,6.75-12.58,11.51-24.02,11.51-19.49,0-34.38-14.12-34.38-34.38s14.43-34.38,35.61-34.38c13.97,0,28.08,6.52,31.54,22.71h-15.27c-2.46-5.83-8.29-9.44-16.04-9.44-11.97,0-20.72,8.67-20.72,21.1s8.82,21.1,20.41,21.1c6.45,0,15.42-2.84,17.65-12.58h-18.72v-10.36h33.69v34.07Z"/>
+        </g>
+      </svg>
+    </div>
+    <div class="top-badge">Nova fase <span>2026</span></div>
+  </div>
+
+  <div class="headline-block">
+    <div class="headline-eyebrow">Vivenciando, juntos, aquilo que nos faz único: nossa cultura!</div>
+    <div class="headline-main">Cada nome aqui é <span class="accent">parte desta história.</span></div>
+  </div>
+
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span class="ticker-item">Ambição</span><span class="ticker-sep">★</span>
+      <span class="ticker-item alt">Sonhar Grande</span><span class="ticker-sep">★</span>
+      <span class="ticker-item">Accountability</span><span class="ticker-sep">★</span>
+      <span class="ticker-item alt">Juntos Somos Mais</span><span class="ticker-sep">★</span>
+      <span class="ticker-item">Ambição</span><span class="ticker-sep">★</span>
+      <span class="ticker-item alt">Sonhar Grande</span><span class="ticker-sep">★</span>
+      <span class="ticker-item">Accountability</span><span class="ticker-sep">★</span>
+      <span class="ticker-item alt">Juntos Somos Mais</span><span class="ticker-sep">★</span>
+    </div>
+  </div>
+
+  <div class="names-area">
+    <div class="names-grid" id="namesGrid"></div>
+  </div>
+
+  <div class="footer">
+    <div class="counter"><em id="counterNum">0</em> pessoas nessa jornada</div>
+
+  </div>
+</div>
+
+<div class="flash" id="flash">
+  <div class="flash-label">★ Chegou mais um</div>
+  <div class="flash-nome" id="flashNome"></div>
+  <div class="flash-valor" id="flashValor"></div>
+</div>
+
+<script>
+const BASE = window.location.pathname.replace(/\/telao\/?$/, '').replace(/\/+$/, '');
+
+const CORES = [
+  { color: '#fdffdf', shadow: '0 0 6px rgba(253,255,223,0.5)' },
+  { color: '#d9f22a', shadow: '0 0 8px rgba(217,242,42,0.7), 0 0 20px rgba(217,242,42,0.2)' },
+  { color: '#7ba4ff', shadow: '0 0 8px rgba(123,164,255,0.6)' },
+  { color: '#aaffee', shadow: '0 0 8px rgba(170,255,238,0.5)' },
+];
+
+const seen = new Set();
+const nomeData = [];
+let count = 0;
+let lastId = 0;
+
+function calcFontSize(total) {
+  if (total <= 10)  return 38;
+  if (total <= 20)  return 32;
+  if (total <= 35)  return 26;
+  if (total <= 55)  return 21;
+  if (total <= 80)  return 17;
+  if (total <= 120) return 14;
+  return 12;
+}
+
+function reflow() {
+  const sz = calcFontSize(count);
+  const grid = document.getElementById('namesGrid');
+  grid.querySelectorAll('.name-tag').forEach(el => {
+    el.style.fontSize = sz + 'px';
+  });
+}
+
+function addNome(nome, cor) {
+  const grid = document.getElementById('namesGrid');
+  const el = document.createElement('div');
+  el.className = 'name-tag';
+  el.textContent = nome;
+  el.style.color = cor.color;
+  el.style.textShadow = cor.shadow;
+  el.style.fontSize = calcFontSize(count) + 'px';
+  grid.appendChild(el);
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('visible')));
+  return el;
+}
+
+function placeNome(nome, valor, isNew) {
+  if (seen.has(nome)) return;
+  seen.add(nome);
+  count++;
+  document.getElementById('counterNum').textContent = count;
+
+  const cor = CORES[count % CORES.length];
+  nomeData.push({ nome, cor });
+
+  // Reflow todos para novo tamanho, depois adiciona o novo
+  reflow();
+  const el = addNome(nome, cor);
+
+  if (isNew) {
+    el.classList.add('highlight');
+    const origShadow = cor.shadow;
+    el.style.textShadow = '0 0 24px #d9f22a, 0 0 60px rgba(217,242,42,0.5)';
+    setTimeout(() => {
+      el.style.transition = 'text-shadow 1s ease';
+      el.style.textShadow = origShadow;
+      setTimeout(() => el.classList.remove('highlight'), 1200);
+    }, 1600);
+  }
+}
+
+function showFlash(nome, valor) {
+  const f = document.getElementById('flash');
+  document.getElementById('flashNome').textContent = nome;
+  document.getElementById('flashValor').textContent = '★ ' + valor;
+  f.classList.add('show');
+  setTimeout(() => f.classList.remove('show'), 3200);
+}
+
+async function poll() {
+  try {
+    const r = await fetch(BASE + '/api/assinaturas');
+    const lista = await r.json();
+    lista.forEach(a => {
+      const isNew = a.id > lastId && lastId > 0;
+      placeNome(a.nome, a.valor, isNew);
+      if (isNew) showFlash(a.nome, a.valor);
+    });
+    if (lista.length) lastId = Math.max(...lista.map(a => a.id));
+  } catch(e) {}
+}
+
+poll();
+setInterval(poll, 3000);
+
+// Pulso sutil aleatório
+setInterval(() => {
+  const tags = document.querySelectorAll('.name-tag.visible:not(.highlight)');
+  if (!tags.length) return;
+  const el = tags[Math.floor(Math.random() * tags.length)];
+  const orig = el.style.textShadow;
+  el.style.transition = 'text-shadow 0.4s, opacity 0.4s';
+  el.style.textShadow = '0 0 16px rgba(217,242,42,0.9)';
+  el.style.opacity = '1';
+  setTimeout(() => {
+    el.style.textShadow = orig;
+    el.style.opacity = '';
+  }, 700);
+}, 1200);
+</script>
+</body>
+</html>
