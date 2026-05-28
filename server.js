@@ -81,7 +81,7 @@ app.get('/{*path}', (req, res) => {
   serveHtml('assinar.html', res);
 });
 
-const PORT = 9095;
+const PORT = process.env.PORT || 9095;
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`Convocação rodando na porta ${PORT}`);
 });
